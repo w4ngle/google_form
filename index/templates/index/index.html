@@ -1,0 +1,72 @@
+{% extends 'index/layout.html' %}
+{% load static %}
+{% block script %}
+<script src = "{% static 'index/index.js' %}" defer></script>
+<script src="{% static 'lib/cookie.min.js' %}" defer></script>
+{% endblock %}
+{% load static %}
+{% block body %}
+<div class="container-fluid">
+    <div class="topnav nav-effect">
+        <div class="nav-padding">
+            <span class="nav-ham" id="nav-ham">&#9776;</span>
+            <img src = "{% static 'Icon/icon.png' %}" alt = "Google Forms Icon(CLONE)" class="navbar-icon form-icon" title = "Forms">
+            <span class="nav-text" title = "Forms"><a href = "{% url 'index' %}" class="nav-link">3fan forms</a></span>
+            <a href="{% url 'logout' %}">
+                <img src = "{% static 'Icon/Logout.jpg' %}" alt = "Logout Icon" class="navbar-icon float-right logout-icon" title = "Logout">
+            </a>
+        </div>
+    </div>
+    <div class="sidebar" id = "sidebar">
+        <span class="close-sidebar" id="close-sidebar">&times;</span>
+        <div class="sidebar-content">
+            <h4 class="sidebar-title">
+                <a href = "{% url 'index' %}" class="sidebar-title-link">
+                    <span>3Fan team</span>
+                </a>
+            </h4>
+            <p class="text-label">Жмырко Денис <a href="https://github.com/RuD111" class="link">здесь</a></p>
+            <p class="text-label">Жданов Артур <a href="https://github.com/w4ngle" class="link">он тут)</a></p>
+            <p class="text-label">Лебединский Артем <a href="" class="link">сюда</a></p>
+            <p class="text-label">Git с кодом: <a href="https://github.com/w4ngle/google_form">
+                <img src = "{% static 'Icon/github.png' %}" class="github-icon" alt="GitHub"></a></p>
+
+        </div>
+    </div>
+    <div class="create-form">
+        <div class="container">
+            <p class="forms-label">Создать новый опрос</p>
+            <div class="form-template-box">
+                <img src = "{% static 'Icon/blank-form.png' %}" alt = "Blank form" title = "Blank form" id="create-blank-form">
+                <span class="form-template-label">Пустой опрос</span>
+            </div>
+            <div class="form-template-box big-screen">
+                <img src = "{% static 'Template/contact_information.png' %}" alt = "Contact Information" title = "Contact Information" id="create-contact-form">
+                <span class="form-template-label">Контактная инф.</span>
+            </div>
+
+            <div class="form-template-box big-screen">
+                <img src = "{% static 'Template/customer_feedback.png' %}" alt = "Event Registration" title = "Event Registration" id="create-event-registration">
+                <span class="form-template-label">Регистрация на мер.</span>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="form-list">
+            <p class="forms-label">Твои опросы:</p>
+            {% for i in forms %}
+            <a href = "{% url 'edit_form' i.code %}" class="form-list-link">
+                <div class="form-box">
+                    <div class="form-list-title"><h5 class="form-list-title-text">{{i.title}}</h5></div>
+                    {% if i.createdAt == i.updatedAt %}
+                    <p class="form-list-timestamp">{{i.createdAt}}</p>
+                    {% else %}
+                    <p class="form-list-timestamp">{{i.updatedAt}}</p>
+                    {% endif %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

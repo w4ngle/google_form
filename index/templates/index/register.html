@@ -1,0 +1,36 @@
+{% extends 'index/layout.html' %}
+{% block body %}
+<div class="container">
+    <form action="{% url 'register' %}" method="post" class="box box-shadow margin-top-bottom">
+        <div class="form-group">
+            <h1 class="box-title">Регистриция</h1>
+            <p class="form-error">{{message}}</p>
+            {% csrf_token %}
+        </div>
+        <div class="form-group form-animate">
+            <p class="form-label">Имя пользователя:</p>
+            <input type="text" class="form-control input-animate" name="username" required>
+            <span class="input-onFocus"></span>
+        </div>
+        <div class="form-group form-animate">
+            <p class="form-label">Электронная почта:</p>
+            <input type="email" name="email" class="form-control input-animate" required>
+            <span class="input-onFocus"></span>
+        </div>
+        <div class="form-group form-animate">
+            <p class="form-label">Пароль:</p>
+            <input type="password" name="password" class="form-control input-animate" required>
+            <span class="input-onFocus"></span>
+        </div>
+        <div class="form-group form-animate">
+            <p class="form-label">Подтверждение пароля:</p>
+            <input type="password" name="confirmation" class="form-control input-animate" required>
+            <span class="input-onFocus"></span>
+        </div>
+        <div class="form-group">
+            <p class="form-label">У вас уже есть аккаунт? <a class="link" href = "{% url 'login' %}">Войти</a></p>
+            <input type="submit" value="Регистрация" class="btn btn-dark form-control">
+        </div>
+    </form>
+</div>
+{% endblock %}
